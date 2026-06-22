@@ -3,704 +3,337 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Your Website</title>
+  <title>ShopCraft — Curated Goods</title>
+
   <!-- Bootstrap 5 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <!-- Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
-
-  <style>
-    /* ── Design tokens ── */
-    :root {
-      --clr-bg:        #F8F7F4;
-      --clr-surface:   #FFFFFF;
-      --clr-primary:   #2C3E50;
-      --clr-accent:    #C0853A;
-      --clr-accent-lt: #F0DCC0;
-      --clr-text:      #2C3E50;
-      --clr-muted:     #7A8694;
-      --clr-border:    #E2DDD5;
-      --ff-display:    'Playfair Display', Georgia, serif;
-      --ff-body:       'Inter', system-ui, sans-serif;
-      --radius:        6px;
-      --shadow-card:   0 2px 12px rgba(0,0,0,.07);
-    }
-
-    *, *::before, *::after { box-sizing: border-box; }
-
-    body {
-      background: var(--clr-bg);
-      color: var(--clr-text);
-      font-family: var(--ff-body);
-      font-size: 1rem;
-      line-height: 1.65;
-    }
-
-    /* ── NAVBAR ── */
-    .navbar-custom {
-      background: var(--clr-surface);
-      border-bottom: 1px solid var(--clr-border);
-      padding: 0.85rem 0;
-      position: sticky;
-      top: 0;
-      z-index: 1030;
-    }
-
-    .navbar-brand {
-      font-family: var(--ff-display);
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: var(--clr-primary) !important;
-      letter-spacing: -.02em;
-    }
-
-    .navbar-nav .nav-link {
-      font-size: .875rem;
-      font-weight: 500;
-      color: var(--clr-muted) !important;
-      padding: .5rem .85rem !important;
-      transition: color .2s;
-    }
-    .navbar-nav .nav-link:hover,
-    .navbar-nav .nav-link.active {
-      color: var(--clr-accent) !important;
-    }
-
-    .navbar-toggler {
-      border: none;
-      color: var(--clr-primary);
-      font-size: 1.3rem;
-      padding: .25rem .5rem;
-    }
-    .navbar-toggler:focus { box-shadow: none; }
-
-    /* ── HERO ── */
-    #hero {
-      background: linear-gradient(135deg, var(--clr-primary) 0%, #3d5166 100%);
-      color: #fff;
-      padding: 110px 0 90px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    #hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      pointer-events: none;
-    }
-    #hero .hero-eyebrow {
-      display: inline-block;
-      font-size: .75rem;
-      font-weight: 600;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--clr-accent-lt);
-      margin-bottom: 1rem;
-    }
-    #hero h1 {
-      font-family: var(--ff-display);
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 700;
-      line-height: 1.15;
-      margin-bottom: 1.25rem;
-    }
-    #hero p {
-      font-size: 1.1rem;
-      color: rgba(255,255,255,.75);
-      max-width: 520px;
-      margin: 0 auto 2rem;
-    }
-    .btn-accent {
-      background: var(--clr-accent);
-      color: #fff;
-      border: none;
-      padding: .7rem 2rem;
-      border-radius: var(--radius);
-      font-weight: 600;
-      font-size: .95rem;
-      letter-spacing: .02em;
-      transition: background .2s, transform .15s;
-    }
-    .btn-accent:hover {
-      background: #a57030;
-      color: #fff;
-      transform: translateY(-1px);
-    }
-
-    /* ── SECTION TITLES ── */
-    .section-label {
-      font-size: .72rem;
-      font-weight: 700;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--clr-accent);
-      margin-bottom: .35rem;
-    }
-    .section-heading {
-      font-family: var(--ff-display);
-      font-size: clamp(1.5rem, 3vw, 2.2rem);
-      font-weight: 700;
-      color: var(--clr-primary);
-      margin-bottom: .6rem;
-    }
-    .section-lead {
-      color: var(--clr-muted);
-      max-width: 560px;
-      font-size: .95rem;
-    }
-
-    /* ── INTRO ── */
-    #Introduction {
-      padding: 80px 0;
-      border-bottom: 1px solid var(--clr-border);
-    }
-    .intro-rule {
-      width: 48px;
-      height: 3px;
-      background: var(--clr-accent);
-      border: none;
-      margin: 1.25rem 0;
-    }
-
-    /* ── FEATURED ── */
-    #featured {
-      padding: 80px 0;
-      border-bottom: 1px solid var(--clr-border);
-    }
-    .card {
-      border: 1px solid var(--clr-border);
-      border-radius: var(--radius);
-      background: var(--clr-surface);
-      box-shadow: var(--shadow-card);
-      overflow: hidden;
-      transition: transform .2s, box-shadow .2s;
-      height: 100%;
-    }
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0,0,0,.11);
-    }
-    .card-img-placeholder {
-      background: var(--clr-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 170px;
-      color: var(--clr-muted);
-      font-size: 2rem;
-      position: relative;
-    }
-    .card-img-placeholder::before,
-    .card-img-placeholder::after {
-      content: '';
-      position: absolute;
-      width: 1px;
-      background: #c8c3bb;
-    }
-    .card-img-placeholder::before {
-      height: 100%; left: 0; top: 0;
-      transform: rotate(0);
-      width: 100%; height: 1px;
-      top: 50%; left: 0;
-      transform: rotate(0);
-    }
-    /* X cross placeholder */
-    .img-x {
-      width: 100%;
-      height: 170px;
-      position: relative;
-      background: var(--clr-border);
-      overflow: hidden;
-    }
-    .img-x::before,
-    .img-x::after {
-      content: '';
-      position: absolute;
-      background: #c5bfb5;
-      width: 140%;
-      height: 1px;
-      top: 50%;
-      left: -20%;
-    }
-    .img-x::before { transform: rotate(calc(atan2(170, 100) * 1rad)); }
-    .img-x::after  { transform: rotate(calc(-1 * atan2(170, 100) * 1rad)); }
-
-    .card-body { padding: 1rem 1.1rem; }
-    .card-title {
-      font-family: var(--ff-display);
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--clr-primary);
-      margin-bottom: .4rem;
-    }
-    .card-text {
-      font-size: .85rem;
-      color: var(--clr-muted);
-      margin-bottom: .85rem;
-    }
-    .btn-outline-accent {
-      border: 1.5px solid var(--clr-accent);
-      color: var(--clr-accent);
-      font-size: .82rem;
-      font-weight: 600;
-      padding: .35rem 1rem;
-      border-radius: var(--radius);
-      background: transparent;
-      transition: background .2s, color .2s;
-    }
-    .btn-outline-accent:hover {
-      background: var(--clr-accent);
-      color: #fff;
-    }
-
-    /* sidebar in featured */
-    .featured-sidebar p {
-      font-size: .9rem;
-      color: var(--clr-muted);
-    }
-
-    /* ── CATEGORIES ── */
-    #categories-section {
-      padding: 80px 0;
-      border-bottom: 1px solid var(--clr-border);
-    }
-    .cat-card {
-      border: 1px solid var(--clr-border);
-      border-radius: var(--radius);
-      background: var(--clr-surface);
-      overflow: hidden;
-      box-shadow: var(--shadow-card);
-      transition: transform .2s, box-shadow .2s;
-    }
-    .cat-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 22px rgba(0,0,0,.1);
-    }
-    .cat-img {
-      width: 100%;
-      height: 130px;
-      background: var(--clr-border);
-      position: relative;
-      overflow: hidden;
-    }
-    .cat-img::before,
-    .cat-img::after {
-      content: '';
-      position: absolute;
-      background: #c5bfb5;
-      width: 140%;
-      height: 1px;
-      top: 50%;
-      left: -20%;
-    }
-    .cat-img::before { transform: rotate(calc(atan2(130, 100) * 1rad)); }
-    .cat-img::after  { transform: rotate(calc(-1 * atan2(130, 100) * 1rad)); }
-    .cat-body { padding: .65rem .75rem .75rem; }
-    .cat-name {
-      font-size: .82rem;
-      font-weight: 600;
-      color: var(--clr-primary);
-      margin-bottom: .5rem;
-    }
-    .btn-cat {
-      width: 100%;
-      font-size: .78rem;
-      font-weight: 600;
-      padding: .3rem .5rem;
-      background: var(--clr-primary);
-      color: #fff;
-      border: none;
-      border-radius: var(--radius);
-      transition: background .2s;
-    }
-    .btn-cat:hover { background: var(--clr-accent); color: #fff; }
-
-    /* ── RESOURCES + ABOUT row ── */
-    #resources,
-    #about {
-      padding: 70px 0;
-    }
-    .resources-map {
-      width: 100%;
-      height: 180px;
-      background: #dce6ef;
-      border-radius: var(--radius);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--clr-muted);
-      font-size: 2rem;
-      border: 1px solid var(--clr-border);
-    }
-    .resource-snippet {
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-      border: 1px solid var(--clr-border);
-      border-radius: var(--radius);
-      padding: 1rem;
-      background: var(--clr-surface);
-    }
-    .resource-thumb {
-      width: 70px;
-      height: 70px;
-      background: var(--clr-border);
-      border-radius: 4px;
-      flex-shrink: 0;
-      position: relative;
-      overflow: hidden;
-    }
-    .resource-thumb::before,
-    .resource-thumb::after {
-      content: '';
-      position: absolute;
-      background: #c5bfb5;
-      width: 140%;
-      height: 1px;
-      top: 50%;
-      left: -20%;
-    }
-    .resource-thumb::before { transform: rotate(45deg); }
-    .resource-thumb::after  { transform: rotate(-45deg); }
-    .resource-title {
-      font-weight: 600;
-      font-size: .9rem;
-      color: var(--clr-primary);
-      margin-bottom: .3rem;
-    }
-    .resource-text {
-      font-size: .82rem;
-      color: var(--clr-muted);
-    }
-
-    #mission .section-heading { font-size: 1.4rem; }
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: .6rem;
-      font-size: .9rem;
-      color: var(--clr-muted);
-      margin-bottom: .5rem;
-    }
-    .contact-item i { color: var(--clr-accent); font-size: 1rem; }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--clr-primary);
-      color: rgba(255,255,255,.55);
-      text-align: center;
-      padding: 1.5rem;
-      font-size: .82rem;
-    }
-    footer a { color: var(--clr-accent-lt); text-decoration: none; }
-
-    /* ── UTILITIES ── */
-    @media (max-width: 768px) {
-      #hero { padding: 70px 0 60px; }
-      #Introduction, #featured, #categories-section { padding: 55px 0; }
-    }
-  </style>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-<!-- ══════════════════════════════════════════
-     NAVBAR  (id="navbar")
-══════════════════════════════════════════ -->
-<nav id="navbar" class="navbar navbar-expand-lg navbar-custom navbar-light">
-  <div class="container">
-    <a class="navbar-brand" href="#">Your Website</a>
-    <button class="navbar-toggler" type="button"
-            data-bs-toggle="collapse" data-bs-target="#navMenu"
-            aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
-      <i class="bi bi-list"></i>
-    </button>
-    <div class="collapse navbar-collapse" id="navMenu">
-      <ul class="navbar-nav ms-auto align-items-lg-center">
-        <li class="nav-item"><a class="nav-link active" href="#hero">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#Introduction">Intro</a></li>
-        <li class="nav-item"><a class="nav-link" href="#featured">Featured</a></li>
-        <li class="nav-item"><a class="nav-link" href="#categories-section">Categories</a></li>
-        <li class="nav-item"><a class="nav-link" href="#resources">Sample Resources</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+  <!-- ═══════════════════════════════════════
+       NAVBAR  (id="navbar")
+  ═══════════════════════════════════════ -->
+  <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+    <div class="container">
+      <a class="navbar-brand" href="#home">ShopCraft</a>
 
-<!-- ══════════════════════════════════════════
-     HERO SECTION  (id="hero")
-══════════════════════════════════════════ -->
-<section id="hero">
-  <div class="container position-relative" style="z-index:1">
-    <span class="hero-eyebrow">Welcome to Our Store</span>
-    <h1>Discover Products<br>You'll Love</h1>
-    <p>Browse our curated collection of quality goods — handpicked for style, value, and lasting satisfaction.</p>
-    <a href="#featured" class="btn btn-accent">Get Started</a>
-  </div>
-</section>
+      <button class="navbar-toggler" type="button"
+              data-bs-toggle="collapse" data-bs-target="#navMenu"
+              aria-controls="navMenu" aria-expanded="false"
+              aria-label="Toggle navigation">
+        <i class="bi bi-list"></i>
+      </button>
 
-<!-- ══════════════════════════════════════════
-     INTRODUCTION SECTION  (id="Introduction")
-══════════════════════════════════════════ -->
-<section id="Introduction">
-  <div class="container">
-    <p class="section-label">Introduction</p>
-    <h2 class="section-heading">What We Offer</h2>
-    <hr class="intro-rule">
-    <p class="section-lead">
-      We bring you a thoughtfully curated marketplace where quality meets value.
-      Our team sources products across multiple categories — from everyday essentials
-      to unique finds — so you can shop with confidence and ease.
-    </p>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════
-     FEATURED SECTION  (id="featured")
-══════════════════════════════════════════ -->
-<section id="featured">
-  <div class="container">
-    <div class="row gy-4 align-items-start">
-
-      <!-- Sidebar -->
-      <div class="col-lg-3 featured-sidebar">
-        <p class="section-label">Featured</p>
-        <h2 class="section-heading">Browse by Category</h2>
-        <p>
-          Explore our handpicked selection across top categories. Each item is
-          vetted for quality and ships quickly to your door.
-        </p>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#Introduction">Intro</a></li>
+          <li class="nav-item"><a class="nav-link" href="#featured">Featured</a></li>
+          <li class="nav-item"><a class="nav-link" href="#categories-section">Categories</a></li>
+          <li class="nav-item"><a class="nav-link" href="#resources">Sample Resources</a></li>
+        </ul>
       </div>
+    </div>
+  </nav>
 
-      <!-- Cards -->
-      <div class="col-lg-9">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+  <!-- ═══════════════════════════════════════
+       HERO SECTION  (id="home" + id="hero")
+  ═══════════════════════════════════════ -->
+  <section id="home">
+    <div id="hero" class="hero-inner d-flex align-items-center">
+      <div class="container text-center">
+        <p class="hero-eyebrow">New Collection · Spring 2024</p>
+        <h1 class="hero-title">Goods Worth<br/>Keeping.</h1>
+        <p class="hero-sub">Hand-picked products crafted for everyday life — minimal clutter, maximum quality.</p>
+        <a href="#featured" class="btn btn-hero mt-3">Get Started</a>
+      </div>
+    </div>
+  </section>
 
-          <div class="col">
-            <div class="card">
-              <div class="img-x"></div>
-              <div class="card-body">
-                <h3 class="card-title">Headline</h3>
-                <p class="card-text">Short product description goes here.</p>
-                <a href="#" class="btn btn-outline-accent">Read More</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card">
-              <div class="img-x"></div>
-              <div class="card-body">
-                <h3 class="card-title">Category Two</h3>
-                <p class="card-text">Short product description goes here.</p>
-                <a href="#" class="btn btn-outline-accent">Read More</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card">
-              <div class="img-x"></div>
-              <div class="card-body">
-                <h3 class="card-title">Category Three</h3>
-                <p class="card-text">Short product description goes here.</p>
-                <a href="#" class="btn btn-outline-accent">Read More</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card">
-              <div class="img-x"></div>
-              <div class="card-body">
-                <h3 class="card-title">Category Four</h3>
-                <p class="card-text">Short product description goes here.</p>
-                <a href="#" class="btn btn-outline-accent">Read More</a>
-              </div>
-            </div>
-          </div>
-
+  <!-- ═══════════════════════════════════════
+       INTRODUCTION SECTION  (id="Introduction")
+  ═══════════════════════════════════════ -->
+  <section id="Introduction" class="section-intro">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+          <p class="section-label">Introduction</p>
+          <h2 class="section-heading">Why ShopCraft?</h2>
+          <div class="divider mx-auto"></div>
+          <p class="intro-body">
+            We cut through the noise. Every item in our store is tested, curated, and approved by real humans — no filler, no fads. Whether you're furnishing a home or upgrading your everyday carry, you'll find things that earn their place.
+          </p>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ══════════════════════════════════════════
-     CATEGORIES SECTION  (id="categories-section")
-══════════════════════════════════════════ -->
-<section id="categories-section">
-  <div class="container">
-    <p class="section-label">Categories</p>
-    <h2 class="section-heading mb-4">Browse by Category</h2>
+  <!-- ═══════════════════════════════════════
+       FEATURED SECTION  (id="featured")
+  ═══════════════════════════════════════ -->
+  <section id="featured" class="section-featured">
+    <div class="container">
+      <p class="section-label">Featured</p>
+      <h2 class="section-heading">Browse by Category</h2>
+      <div class="divider"></div>
 
-    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-6 g-3">
+      <div class="row gx-4 gy-4 mt-3 align-items-start">
 
-      <div class="col">
-        <div class="cat-card">
-          <div class="cat-img"></div>
-          <div class="cat-body">
-            <p class="cat-name">Category One</p>
-            <a href="#" class="btn btn-cat">View Resource</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="cat-card">
-          <div class="cat-img"></div>
-          <div class="cat-body">
-            <p class="cat-name">Category Two</p>
-            <a href="#" class="btn btn-cat">View Resource</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="cat-card">
-          <div class="cat-img"></div>
-          <div class="cat-body">
-            <p class="cat-name">Category Three</p>
-            <a href="#" class="btn btn-cat">View Resource</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="cat-card">
-          <div class="cat-img"></div>
-          <div class="cat-body">
-            <p class="cat-name">Category Four</p>
-            <a href="#" class="btn btn-cat">View Resource</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="cat-card">
-          <div class="cat-img"></div>
-          <div class="cat-body">
-            <p class="cat-name">Category Five</p>
-            <a href="#" class="btn btn-cat">View Resource</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="cat-card">
-          <div class="cat-img"></div>
-          <div class="cat-body">
-            <p class="cat-name">Category Six</p>
-            <a href="#" class="btn btn-cat">View Resource</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════
-     RESOURCES + ABOUT ROW
-══════════════════════════════════════════ -->
-<div class="border-bottom" style="border-color: var(--clr-border) !important;">
-  <div class="container">
-    <div class="row gy-5 py-5">
-
-      <!-- SAMPLE RESOURCES (id="resources") -->
-      <div class="col-md-6" id="resources">
-        <p class="section-label">Sample Resources</p>
-        <h2 class="section-heading mb-4">Explore More</h2>
-        <div class="d-flex flex-column gap-3">
-          <!-- Map placeholder -->
-          <div class="resources-map">
-            <i class="bi bi-geo-alt-fill"></i>
-          </div>
-          <!-- Article snippet -->
-          <div class="resource-snippet">
-            <div class="resource-thumb"></div>
-            <div>
-              <p class="resource-title">Headline Article</p>
-              <p class="resource-text mb-0">
-                A short teaser about the featured resource or guide available on this site.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ABOUT SECTION (id="about") -->
-      <div class="col-md-6" id="about">
-        <p class="section-label">About</p>
-        <h2 class="section-heading mb-1">Who We Are</h2>
-
-        <div id="mission" class="mt-3">
-          <p class="section-label">Mission Statement</p>
-          <p class="section-lead mb-4">
-            We believe everyone deserves access to quality products at fair prices.
-            Our mission is to simplify shopping by curating the best items and
-            delivering them with care and transparency.
+        <!-- Left sidebar text -->
+        <div class="col-lg-3 col-md-12 featured-sidebar">
+          <p class="sidebar-body">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor haadidunt ut labore et dolore magna aliqua.
           </p>
         </div>
 
-        <div class="contact-item">
-          <i class="bi bi-envelope-fill"></i>
-          <a href="mailto:email@example.com" style="color: var(--clr-muted); text-decoration:none;">
-            email@example.com
-          </a>
-        </div>
-        <div class="contact-item">
-          <i class="bi bi-telephone-fill"></i>
-          <a href="tel:+11234567890" style="color: var(--clr-muted); text-decoration:none;">
-            123-456-7890
-          </a>
+        <!-- Featured cards -->
+        <div class="col-lg-9 col-md-12">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-3">
+
+            <div class="col">
+              <div class="card h-100 feat-card">
+                <div class="card-img-placeholder"><i class="bi bi-image"></i></div>
+                <div class="card-body">
+                  <h6 class="card-title">Lifestyle Goods</h6>
+                  <p class="card-text small">Curated picks for the modern home.</p>
+                </div>
+                <div class="card-footer">
+                  <a href="#" class="btn btn-outline-primary btn-sm w-100">Read More</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card h-100 feat-card">
+                <div class="card-img-placeholder"><i class="bi bi-image"></i></div>
+                <div class="card-body">
+                  <h6 class="card-title">Category Two</h6>
+                  <p class="card-text small">Quality tools for daily tasks.</p>
+                </div>
+                <div class="card-footer">
+                  <a href="#" class="btn btn-outline-primary btn-sm w-100">Read More</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card h-100 feat-card">
+                <div class="card-img-placeholder"><i class="bi bi-image"></i></div>
+                <div class="card-body">
+                  <h6 class="card-title">Category Three</h6>
+                  <p class="card-text small">Essentials that stand the test of time.</p>
+                </div>
+                <div class="card-footer">
+                  <a href="#" class="btn btn-outline-primary btn-sm w-100">Read More</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card h-100 feat-card">
+                <div class="card-img-placeholder"><i class="bi bi-image"></i></div>
+                <div class="card-body">
+                  <h6 class="card-title">Category Four</h6>
+                  <p class="card-text small">Seasonal finds worth exploring.</p>
+                </div>
+                <div class="card-footer">
+                  <a href="#" class="btn btn-outline-primary btn-sm w-100">Read More</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
-
     </div>
-  </div>
-</div>
+  </section>
 
-<!-- ══════════════════════════════════════════
-     FOOTER
-══════════════════════════════════════════ -->
-<footer>
-  &copy; 2022 <a href="#">Your Website</a>. All rights reserved.
-</footer>
+  <!-- ═══════════════════════════════════════
+       CATEGORIES SECTION  (id="categories-section")
+  ═══════════════════════════════════════ -->
+  <section id="categories-section" class="section-categories">
+    <div class="container">
+      <p class="section-label">Categories</p>
+      <h2 class="section-heading">Browse by Category</h2>
+      <div class="divider"></div>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+      <div class="row row-cols-2 row-cols-sm-3 row-cols-lg-6 g-3 mt-3">
 
-<!-- Smooth scroll + active nav highlight -->
-<script>
-  // Smooth scroll for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+        <div class="col">
+          <div class="card h-100 cat-card text-center">
+            <div class="cat-img-placeholder"><i class="bi bi-grid-fill"></i></div>
+            <div class="card-body p-2">
+              <p class="cat-title">Category One</p>
+            </div>
+            <div class="card-footer p-2">
+              <a href="#" class="btn btn-dark btn-sm w-100">View Resource</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card h-100 cat-card text-center">
+            <div class="cat-img-placeholder"><i class="bi bi-grid-fill"></i></div>
+            <div class="card-body p-2">
+              <p class="cat-title">Category Two</p>
+            </div>
+            <div class="card-footer p-2">
+              <a href="#" class="btn btn-dark btn-sm w-100">View Resource</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card h-100 cat-card text-center">
+            <div class="cat-img-placeholder"><i class="bi bi-grid-fill"></i></div>
+            <div class="card-body p-2">
+              <p class="cat-title">Category Three</p>
+            </div>
+            <div class="card-footer p-2">
+              <a href="#" class="btn btn-dark btn-sm w-100">View Resource</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card h-100 cat-card text-center">
+            <div class="cat-img-placeholder"><i class="bi bi-grid-fill"></i></div>
+            <div class="card-body p-2">
+              <p class="cat-title">Category WI</p>
+            </div>
+            <div class="card-footer p-2">
+              <a href="#" class="btn btn-dark btn-sm w-100">View Resource</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card h-100 cat-card text-center">
+            <div class="cat-img-placeholder"><i class="bi bi-grid-fill"></i></div>
+            <div class="card-body p-2">
+              <p class="cat-title">Category WI</p>
+            </div>
+            <div class="card-footer p-2">
+              <a href="#" class="btn btn-dark btn-sm w-100">View Resource</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card h-100 cat-card text-center">
+            <div class="cat-img-placeholder"><i class="bi bi-grid-fill"></i></div>
+            <div class="card-body p-2">
+              <p class="cat-title">Category TV</p>
+            </div>
+            <div class="card-footer p-2">
+              <a href="#" class="btn btn-dark btn-sm w-100">View Resource</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       BOTTOM ROW: SAMPLE RESOURCES + ABOUT
+  ═══════════════════════════════════════ -->
+  <section class="section-bottom">
+    <div class="container">
+      <div class="row gx-5 gy-5">
+
+        <!-- SAMPLE RESOURCES (id="resources") -->
+        <div class="col-lg-6" id="resources">
+          <p class="section-label">Sample Resources</p>
+          <h2 class="section-heading">Resources</h2>
+          <div class="divider"></div>
+          <div class="row g-3 mt-2">
+            <div class="col-6">
+              <div class="resource-map d-flex align-items-center justify-content-center">
+                <i class="bi bi-geo-alt-fill"></i>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="card resource-card h-100">
+                <div class="card-img-placeholder small-placeholder"><i class="bi bi-image"></i></div>
+                <div class="card-body p-2">
+                  <h6 class="card-title mb-1">Resource Headline</h6>
+                  <div class="res-lines">
+                    <div class="res-line"></div>
+                    <div class="res-line short"></div>
+                    <div class="res-line"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ABOUT (id="about") -->
+        <div class="col-lg-6" id="about">
+          <p class="section-label">About</p>
+          <h2 class="section-heading">About Us</h2>
+          <div class="divider"></div>
+
+          <!-- MISSION (id="mission") -->
+          <div id="mission" class="mission-block mt-3">
+            <p class="mission-label">Mission Statement</p>
+            <div class="res-lines mb-3">
+              <div class="res-line"></div>
+              <div class="res-line short"></div>
+              <div class="res-line"></div>
+              <div class="res-line short"></div>
+            </div>
+            <p class="contact-item"><i class="bi bi-envelope-fill"></i> email@example.com</p>
+            <p class="contact-item"><i class="bi bi-telephone-fill"></i> 123-456-7890</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="container text-center">
+      <p class="footer-copy">© 2024 ShopCraft — All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Smooth scroll + navbar scroll effect -->
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
     });
-  });
 
-  // Highlight active nav link on scroll
-  const sections = document.querySelectorAll('section[id], div[id]');
-  const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        navLinks.forEach(l => l.classList.remove('active'));
-        const active = document.querySelector(`.navbar-nav .nav-link[href="#${entry.target.id}"]`);
-        if (active) active.classList.add('active');
-      }
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          const offset = navbar.offsetHeight + 8;
+          window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+
+          // Close mobile menu if open
+          const collapse = document.getElementById('navMenu');
+          if (collapse.classList.contains('show')) {
+            bootstrap.Collapse.getInstance(collapse)?.hide();
+          }
+        }
+      });
     });
-  }, { threshold: 0.4 });
-  sections.forEach(s => observer.observe(s));
-</script>
-
+  </script>
 </body>
 </html>
