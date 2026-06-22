@@ -174,13 +174,15 @@
       box-shadow: 0 16px 40px rgba(0,0,0,.1);
     }
 
-    .card .card-img-placeholder {
+    .card-img-top {
       background: #f0f0f5;
       height: 200px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 3rem;
+      width: 100%;
+      object-fit: cover;
     }
 
     .card .card-title {
@@ -296,7 +298,8 @@
   <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
       <a class="navbar-brand" href="#">Shop<span>Nest</span></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+        aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navMenu">
@@ -312,7 +315,7 @@
   </nav>
 
   <!-- HERO SECTION -->
-  <section id="hero">
+  <div id="hero">
     <div class="container">
       <div class="row align-items-center gy-5">
         <div class="col-lg-6">
@@ -326,7 +329,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- INTRODUCTION SECTION -->
   <section id="Introduction">
@@ -380,7 +383,7 @@
 
         <div class="col-6 col-md-3">
           <div class="card">
-            <div class="card-img-placeholder">💻</div>
+            <div class="card-img-top d-flex align-items-center justify-content-center bg-light" style="height:200px;font-size:3rem;">💻</div>
             <div class="card-body">
               <h5 class="card-title">Headline</h5>
               <div class="card-price">$299.99</div>
@@ -392,7 +395,7 @@
 
         <div class="col-6 col-md-3">
           <div class="card">
-            <div class="card-img-placeholder">👗</div>
+            <div class="card-img-top d-flex align-items-center justify-content-center bg-light" style="height:200px;font-size:3rem;">👗</div>
             <div class="card-body">
               <h5 class="card-title">Category Two</h5>
               <div class="card-price">$59.99</div>
@@ -404,7 +407,7 @@
 
         <div class="col-6 col-md-3">
           <div class="card">
-            <div class="card-img-placeholder">🏠</div>
+            <div class="card-img-top d-flex align-items-center justify-content-center bg-light" style="height:200px;font-size:3rem;">🏠</div>
             <div class="card-body">
               <h5 class="card-title">Category Three</h5>
               <div class="card-price">$129.99</div>
@@ -416,7 +419,7 @@
 
         <div class="col-6 col-md-3">
           <div class="card">
-            <div class="card-img-placeholder">🎮</div>
+            <div class="card-img-top d-flex align-items-center justify-content-center bg-light" style="height:200px;font-size:3rem;">🎮</div>
             <div class="card-body">
               <h5 class="card-title">Category Four</h5>
               <div class="card-price">$199.99</div>
