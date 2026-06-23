@@ -3,152 +3,447 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ShopNest</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <title>StarkShop — Curated Goods</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --accent: #e94560;
-      --dark: #0f0f1a;
-      --mid: #1a1a2e;
-      --gold: #f5a623;
-      --muted: #9090aa;
+      --ink:       #1a1a2e;
+      --slate:     #2e3a59;
+      --gold:      #c9a84c;
+      --gold-lt:   #f0d98a;
+      --cream:     #faf8f3;
+      --mist:      #edeae2;
+      --text:      #3d3d3d;
+      --subtle:    #7a7a7a;
     }
 
-    body { font-family: 'Segoe UI', sans-serif; color: var(--dark); }
+    *, *::before, *::after { box-sizing: border-box; }
 
-    /* NAVBAR */
-    #navbar {
-      background-color: var(--dark) !important;
-      border-bottom: 2px solid var(--accent);
-    }
-    #navbar .navbar-brand { color: #fff !important; font-weight: 700; font-size: 1.4rem; }
-    #navbar .navbar-brand span { color: var(--accent); }
-    #navbar .nav-link { color: rgba(255,255,255,0.75) !important; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.04em; }
-    #navbar .nav-link:hover { color: var(--accent) !important; }
-    #navbar .navbar-toggler { border-color: rgba(233,69,96,0.5); }
-    #navbar .navbar-toggler-icon {
-      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28233,69,96,0.85%29' stroke-linecap='round' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--cream);
+      margin: 0;
     }
 
-    /* HERO */
+    /* ── NAVBAR ── */
+    .navbar {
+      background: var(--ink);
+      padding: 0 1.5rem;
+      min-height: 64px;
+    }
+
+    .navbar-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      color: var(--gold) !important;
+      letter-spacing: .02em;
+    }
+
+    .navbar-nav .nav-link {
+      color: rgba(255,255,255,.78) !important;
+      font-size: .88rem;
+      font-weight: 500;
+      letter-spacing: .04em;
+      padding: .5rem 1rem !important;
+      transition: color .2s;
+    }
+
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active {
+      color: var(--gold) !important;
+    }
+
+    .navbar-toggler {
+      border-color: rgba(201,168,76,.4);
+    }
+
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(201,168,76,1)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    }
+
+    /* ── HERO ── */
     #hero {
-      background: linear-gradient(135deg, var(--dark) 0%, #16213e 60%, #0f3460 100%);
-      padding: 100px 0;
-      text-align: center;
+      background: linear-gradient(135deg, var(--ink) 0%, var(--slate) 100%);
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
     }
-    #hero h1 { color: #fff; font-weight: 700; font-size: clamp(1.8rem, 5vw, 3rem); }
-    #hero h1 span { color: var(--accent); }
-    #hero p { color: rgba(255,255,255,0.65); max-width: 500px; margin: 1rem auto 2rem; }
-    .btn-accent {
-      background-color: var(--accent);
-      color: #fff;
-      border: none;
-      padding: 0.7rem 2rem;
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 60% 50%, rgba(201,168,76,.13) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-size: .78rem;
       font-weight: 600;
-      border-radius: 4px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+      display: block;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.12;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold-lt);
+    }
+
+    .hero-sub {
+      color: rgba(255,255,255,.65);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      max-width: 460px;
+      margin-bottom: 2rem;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: var(--ink);
+      font-weight: 600;
+      font-size: .9rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .78rem 2rem;
+      border: none;
+      border-radius: 2px;
+      transition: background .2s, transform .15s;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    .btn-gold:hover {
+      background: var(--gold-lt);
+      color: var(--ink);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline-gold {
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+      font-weight: 600;
+      font-size: .9rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .76rem 1.8rem;
+      border-radius: 2px;
+      transition: all .2s;
+      background: transparent;
       text-decoration: none;
       display: inline-block;
-      transition: background 0.2s;
     }
-    .btn-accent:hover { background-color: #c73650; color: #fff; }
 
-    /* SECTIONS */
-    section { padding: 70px 0; }
-    .section-eyebrow { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
-    .section-heading { font-weight: 700; font-size: clamp(1.4rem, 3vw, 2rem); margin-bottom: 0.5rem; }
-    .divider { width: 40px; height: 3px; background: var(--accent); border-radius: 2px; margin: 0.8rem 0 1.5rem; }
-
-    /* INTRO */
-    #Introduction { background: #f8f8fc; }
-
-    /* FEATURED CARDS */
-    #featured { background: #fff; }
-    #featured .card { border: 1px solid #ebebf5; border-radius: 10px; transition: box-shadow 0.2s, transform 0.2s; }
-    #featured .card:hover { box-shadow: 0 10px 28px rgba(15,15,26,0.1); transform: translateY(-3px); }
-    #featured .card .card-img-top {
-      height: 160px;
-      background: linear-gradient(135deg, #f0f0f8, #e0e0f0);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2.5rem; color: var(--muted);
+    .btn-outline-gold:hover {
+      background: var(--gold);
+      color: var(--ink);
     }
-    #featured .card .badge-cat { font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.3rem; }
-    #featured .card .card-title { font-weight: 700; font-size: 0.95rem; }
-    #featured .card .card-text { font-size: 0.82rem; color: var(--muted); }
-    #featured .card .price { font-weight: 700; font-size: 1rem; }
-    #featured .card .price small { text-decoration: line-through; color: var(--muted); font-weight: 400; font-size: 0.75rem; }
-    .btn-dark-sm {
-      background: var(--dark); color: #fff; border: none;
-      padding: 0.4rem 1rem; font-size: 0.78rem; font-weight: 600;
-      border-radius: 4px; cursor: pointer; transition: background 0.2s;
-    }
-    .btn-dark-sm:hover { background: var(--accent); }
 
-    /* CATEGORIES */
-    #categories-section { background: #f8f8fc; }
-    .cat-card { border: 1px solid #ebebf5; border-radius: 10px; overflow: hidden; text-align: center; background: #fff; transition: box-shadow 0.2s, transform 0.2s; }
-    .cat-card:hover { box-shadow: 0 6px 20px rgba(15,15,26,0.09); transform: translateY(-2px); }
-    .cat-thumb {
-      height: 110px; background: linear-gradient(135deg, #e8e8f8, #d5d5ef);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2rem; color: var(--mid);
+    /* ── INTRO ── */
+    #Introduction {
+      background: var(--cream);
+      padding: 5rem 0 4rem;
+      border-bottom: 1px solid var(--mist);
     }
-    .cat-body { padding: 0.8rem; }
-    .cat-body h6 { font-weight: 600; font-size: 0.88rem; margin-bottom: 0.6rem; }
+
+    .section-label {
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .5rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+
+    .section-divider {
+      width: 48px;
+      height: 2px;
+      background: var(--gold);
+      margin: 1rem 0 1.5rem;
+    }
+
+    .intro-body {
+      color: var(--subtle);
+      line-height: 1.85;
+      font-size: 1rem;
+    }
+
+    /* ── FEATURED ── */
+    #featured {
+      background: #fff;
+      padding: 5rem 0;
+    }
+
+    .card-product {
+      border: 1px solid var(--mist);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: box-shadow .25s, transform .2s;
+      background: #fff;
+    }
+
+    .card-product:hover {
+      box-shadow: 0 8px 32px rgba(26,26,46,.1);
+      transform: translateY(-3px);
+    }
+
+    .card-img-wrap {
+      background: var(--mist);
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-img-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-img-placeholder svg {
+      opacity: .25;
+    }
+
+    .card-body-custom {
+      padding: 1rem 1.1rem 1.2rem;
+    }
+
+    .card-cat {
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .3rem;
+    }
+
+    .card-title-custom {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--ink);
+      margin-bottom: .4rem;
+    }
+
+    .card-desc {
+      font-size: .82rem;
+      color: var(--subtle);
+      line-height: 1.6;
+      margin-bottom: .9rem;
+    }
+
+    .btn-read {
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 1px;
+      transition: color .2s;
+    }
+
+    .btn-read:hover { color: var(--ink); border-color: var(--ink); }
+
+    /* ── CATEGORIES ── */
+    #categories-section {
+      background: var(--cream);
+      padding: 5rem 0;
+    }
+
+    .cat-card {
+      border: 1px solid var(--mist);
+      border-radius: 4px;
+      overflow: hidden;
+      text-align: center;
+      transition: box-shadow .25s;
+      background: #fff;
+    }
+
+    .cat-card:hover { box-shadow: 0 6px 24px rgba(26,26,46,.09); }
+
+    .cat-img-wrap {
+      background: var(--mist);
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cat-label {
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--ink);
+      padding: .7rem .5rem .2rem;
+    }
+
     .btn-view {
-      background: var(--mid); color: #fff; border: none;
-      padding: 0.35rem 0.9rem; font-size: 0.75rem; font-weight: 600;
-      border-radius: 4px; text-decoration: none; display: inline-block; transition: background 0.2s;
+      display: inline-block;
+      margin: .4rem .8rem .9rem;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      background: var(--ink);
+      color: #fff;
+      padding: .38rem .9rem;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background .2s;
     }
-    .btn-view:hover { background: var(--accent); color: #fff; }
 
-    /* RESOURCES */
-    #resources { background: #fff; }
-    .map-box {
-      height: 200px; background: linear-gradient(135deg, #dce8f0, #c8dde8);
-      border-radius: 10px; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; font-size: 2rem;
-      color: var(--mid); border: 1px solid #c0d0dc; gap: 0.4rem;
+    .btn-view:hover { background: var(--slate); color: #fff; }
+
+    /* ── RESOURCES + ABOUT ── */
+    #resources {
+      background: #fff;
+      padding: 5rem 0;
     }
-    .map-box span { font-size: 0.8rem; color: var(--muted); font-weight: 500; }
-    .resource-item { display: flex; gap: 1rem; align-items: flex-start; padding: 1rem; border: 1px solid #ebebf5; border-radius: 10px; background: #f8f8fc; margin-bottom: 0.8rem; }
-    .res-thumb { width: 80px; height: 60px; background: linear-gradient(135deg, #e5e5f5, #d0d0eb); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: var(--mid); flex-shrink: 0; }
-    .resource-item h6 { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.2rem; }
-    .resource-item p { font-size: 0.82rem; color: var(--muted); margin: 0; }
 
-    /* ABOUT */
-    #about { background: var(--dark); }
-    #about h2 { color: #fff; font-weight: 700; }
-    #about p { color: rgba(255,255,255,0.65); font-size: 0.95rem; line-height: 1.8; }
-    .stat-box { padding: 1rem; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); text-align: center; }
-    .stat-box .num { font-size: 1.7rem; font-weight: 700; color: var(--gold); }
-    .stat-box .lbl { font-size: 0.75rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.06em; }
+    .resource-card {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 1rem;
+      border: 1px solid var(--mist);
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
 
-    /* MISSION */
-    #mission { background: var(--mid); }
-    #mission h2 { color: #fff; font-weight: 700; }
-    #mission p { color: rgba(255,255,255,0.7); font-size: 0.95rem; font-style: italic; line-height: 1.8; }
-    .mission-divider { height: 2px; background: linear-gradient(90deg, var(--accent), transparent); margin: 1rem 0 1.5rem; }
-    .contact-detail { display: flex; align-items: center; gap: 0.7rem; color: rgba(255,255,255,0.75); margin-bottom: 0.6rem; font-size: 0.9rem; }
-    .contact-detail i { color: var(--accent); font-size: 1.1rem; }
+    .resource-thumb {
+      flex: 0 0 90px;
+      height: 70px;
+      background: var(--mist);
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-    /* FOOTER */
-    footer { background: #070710; color: rgba(255,255,255,0.4); text-align: center; padding: 1.6rem 0; font-size: 0.82rem; border-top: 1px solid rgba(233,69,96,0.2); }
-    footer a { color: var(--accent); text-decoration: none; }
+    .resource-text h6 {
+      font-family: 'Playfair Display', serif;
+      font-size: .92rem;
+      color: var(--ink);
+      margin-bottom: .25rem;
+    }
+
+    .resource-text p {
+      font-size: .78rem;
+      color: var(--subtle);
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    .map-placeholder {
+      background: var(--mist);
+      border-radius: 4px;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--mist);
+      margin-bottom: 1rem;
+    }
+
+    #about .contact-line {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-size: .9rem;
+      color: var(--text);
+      margin-bottom: .5rem;
+    }
+
+    #about .contact-line svg {
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    #mission {
+      border-left: 3px solid var(--gold);
+      padding-left: 1rem;
+      margin-bottom: 1.75rem;
+    }
+
+    #mission p {
+      font-size: .92rem;
+      color: var(--subtle);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      color: rgba(255,255,255,.5);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: .8rem;
+      letter-spacing: .04em;
+    }
+
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    footer a:hover { color: var(--gold-lt); }
+
+    /* ── UTILS ── */
+    @media (max-width: 768px) {
+      #hero { min-height: 70vh; }
+      .hero-sub { font-size: .95rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; transform: none !important; }
+    }
   </style>
 </head>
 <body>
 
   <!-- NAVBAR -->
-  <nav id="navbar" class="navbar navbar-expand-lg navbar-dark sticky-top">
+  <nav class="navbar navbar-expand-lg sticky-top" id="navbar">
     <div class="container">
-      <a class="navbar-brand" href="#hero">Shop<span>Nest</span></a>
+      <a class="navbar-brand" href="#">StarkShop</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
         aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navMenu">
-        <ul class="navbar-nav ms-auto gap-lg-1">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
           <li class="nav-item"><a class="nav-link active" href="#hero">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="#Introduction">Intro</a></li>
           <li class="nav-item"><a class="nav-link" href="#featured">Featured</a></li>
@@ -159,125 +454,133 @@
     </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- HERO SECTION -->
   <section id="hero">
-    <div class="container">
-      <h1>Discover <span>Curated</span> Collections<br>for Every Lifestyle</h1>
-      <p>ShopNest brings together premium brands and everyday essentials — all in one beautifully organized place.</p>
-      <a href="#featured" class="btn-accent">Get Started</a>
-    </div>
-  </section>
-
-  <!-- INTRODUCTION -->
-  <section id="Introduction">
-    <div class="container">
-      <p class="section-eyebrow">Why ShopNest?</p>
-      <h2 class="section-heading">Shopping Made Simple, Stylish &amp; Smart</h2>
-      <div class="divider"></div>
-      <p class="text-muted" style="max-width:700px">We believe finding exactly what you need shouldn't feel like a chore. ShopNest combines intelligent browsing with handpicked selections — so you spend less time searching and more time enjoying.</p>
-      <div class="row g-3 mt-3">
-        <div class="col-sm-6 col-md-3">
-          <div class="d-flex gap-3 align-items-start">
-            <i class="bi bi-lightning-charge-fill fs-4" style="color:var(--accent)"></i>
-            <div><strong>Fast Delivery</strong><p class="small text-muted mb-0">Real-time tracking every step of the way.</p></div>
+    <div class="container py-5">
+      <div class="row align-items-center">
+        <div class="col-lg-7">
+          <span class="hero-eyebrow">New Collection · 2024</span>
+          <h1 class="hero-title">
+            Crafted for the<br><em>discerning few</em>
+          </h1>
+          <p class="hero-sub">
+            Thoughtfully sourced goods from independent makers. Every piece tells a story — find yours in our curated collection.
+          </p>
+          <div class="d-flex flex-wrap gap-3">
+            <a href="#featured" class="btn-gold">Get Started</a>
+            <a href="#categories-section" class="btn-outline-gold">Browse All</a>
           </div>
         </div>
-        <div class="col-sm-6 col-md-3">
-          <div class="d-flex gap-3 align-items-start">
-            <i class="bi bi-shield-check-fill fs-4" style="color:var(--accent)"></i>
-            <div><strong>Verified Quality</strong><p class="small text-muted mb-0">Every item passes our quality check.</p></div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-3">
-          <div class="d-flex gap-3 align-items-start">
-            <i class="bi bi-arrow-counterclockwise fs-4" style="color:var(--accent)"></i>
-            <div><strong>Easy Returns</strong><p class="small text-muted mb-0">30-day hassle-free return policy.</p></div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-3">
-          <div class="d-flex gap-3 align-items-start">
-            <i class="bi bi-percent fs-4" style="color:var(--accent)"></i>
-            <div><strong>Member Deals</strong><p class="small text-muted mb-0">Unlock early access to sales and rewards.</p></div>
-          </div>
+        <div class="col-lg-5 d-none d-lg-flex justify-content-end">
+          <!-- decorative shape -->
+          <svg width="340" height="340" viewBox="0 0 340 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="40" y="40" width="260" height="260" rx="6" fill="rgba(201,168,76,.06)" stroke="rgba(201,168,76,.18)" stroke-width="1.5"/>
+            <rect x="80" y="80" width="180" height="180" rx="4" fill="rgba(201,168,76,.04)" stroke="rgba(201,168,76,.12)" stroke-width="1"/>
+            <line x1="40" y1="40" x2="300" y2="300" stroke="rgba(201,168,76,.08)" stroke-width="1"/>
+            <line x1="300" y1="40" x2="40" y2="300" stroke="rgba(201,168,76,.08)" stroke-width="1"/>
+            <circle cx="170" cy="170" r="60" fill="rgba(201,168,76,.07)" stroke="rgba(201,168,76,.2)" stroke-width="1.5"/>
+            <text x="170" y="178" text-anchor="middle" font-family="Playfair Display, serif" font-size="13" fill="rgba(201,168,76,.5)">Product Image</text>
+          </svg>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FEATURED -->
+  <!-- INTRODUCTION SECTION -->
+  <section id="Introduction">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <p class="section-label">About Us</p>
+          <h2 class="section-title">Goods worth owning.<br>Stories worth sharing.</h2>
+          <div class="section-divider"></div>
+          <p class="intro-body">
+            ShopCraft began as a small studio project with one question: what if every product you owned had a verifiable origin, a maker behind it, and a reason to last? We partner exclusively with independent artisans and small-batch producers — no fast-fashion, no disposables. Browse our collections and discover objects that earn a permanent place in your home.
+          </p>
+          <p class="intro-body mt-3">
+            Whether you're outfitting a kitchen, finding the perfect gift, or building a wardrobe that refuses to follow trends, ShopCraft gives you the provenance, the craft notes, and the direct relationship with makers that mass retail never can.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED SECTION -->
   <section id="featured">
     <div class="container">
-      <div class="row g-4">
-        <div class="col-lg-3">
-          <p class="section-eyebrow">Handpicked Picks</p>
-          <h2 class="section-heading">Browse by Category:</h2>
-          <div class="divider"></div>
-          <p class="text-muted" style="font-size:0.9rem">Our editors curate fresh selections weekly — explore products making waves this season across every lifestyle and budget.</p>
-          <a href="#categories-section" class="btn-accent mt-1">View All</a>
+      <div class="row mb-4 align-items-end">
+        <div class="col">
+          <p class="section-label">Handpicked for you</p>
+          <h2 class="section-title mb-0">Featured Products</h2>
         </div>
-        <div class="col-lg-9">
-          <div class="row g-3">
+        <div class="col-auto d-none d-md-block">
+          <a href="#categories-section" class="btn-read">View all categories</a>
+        </div>
+      </div>
 
-            <div class="col-sm-6 col-md-3">
-              <div class="card h-100">
-                <div class="card-img-top"><i class="bi bi-headphones"></i></div>
-                <div class="card-body">
-                  <div class="badge-cat">Electronics</div>
-                  <h5 class="card-title">Wireless Headphones</h5>
-                  <p class="card-text">Noise-cancelling, 30hr battery life.</p>
-                  <div class="d-flex justify-content-between align-items-center mt-2">
-                    <div class="price">$89 <small>$120</small></div>
-                    <button class="btn-dark-sm">Read More</button>
-                  </div>
-                </div>
+      <div class="row g-4">
+        <!-- card 1 -->
+        <div class="col-sm-6 col-lg-3">
+          <div class="card-product h-100">
+            <div class="card-img-wrap">
+              <div class="card-img-placeholder">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect x="2" y="2" width="44" height="44" rx="2" stroke="#1a1a2e" stroke-width="1.5"/><line x1="2" y1="2" x2="46" y2="46" stroke="#1a1a2e" stroke-width="1.5"/><line x1="46" y1="2" x2="2" y2="46" stroke="#1a1a2e" stroke-width="1.5"/></svg>
               </div>
             </div>
-
-            <div class="col-sm-6 col-md-3">
-              <div class="card h-100">
-                <div class="card-img-top"><i class="bi bi-watch"></i></div>
-                <div class="card-body">
-                  <div class="badge-cat">Accessories</div>
-                  <h5 class="card-title">Smart Watch Pro</h5>
-                  <p class="card-text">Health tracking, always-on display.</p>
-                  <div class="d-flex justify-content-between align-items-center mt-2">
-                    <div class="price">$149 <small>$200</small></div>
-                    <button class="btn-dark-sm">Read More</button>
-                  </div>
-                </div>
+            <div class="card-body-custom">
+              <p class="card-cat">Ceramics</p>
+              <h5 class="card-title-custom">Hand-Thrown Stoneware Mug</h5>
+              <p class="card-desc">Wheel-thrown from locally sourced clay. Each glaze variation is entirely unique.</p>
+              <a href="#" class="btn-read">Read More</a>
+            </div>
+          </div>
+        </div>
+        <!-- card 2 -->
+        <div class="col-sm-6 col-lg-3">
+          <div class="card-product h-100">
+            <div class="card-img-wrap">
+              <div class="card-img-placeholder">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect x="2" y="2" width="44" height="44" rx="2" stroke="#1a1a2e" stroke-width="1.5"/><line x1="2" y1="2" x2="46" y2="46" stroke="#1a1a2e" stroke-width="1.5"/><line x1="46" y1="2" x2="2" y2="46" stroke="#1a1a2e" stroke-width="1.5"/></svg>
               </div>
             </div>
-
-            <div class="col-sm-6 col-md-3">
-              <div class="card h-100">
-                <div class="card-img-top"><i class="bi bi-bag-heart"></i></div>
-                <div class="card-body">
-                  <div class="badge-cat">Fashion</div>
-                  <h5 class="card-title">Leather Tote Bag</h5>
-                  <p class="card-text">Full-grain leather, spacious interior.</p>
-                  <div class="d-flex justify-content-between align-items-center mt-2">
-                    <div class="price">$65 <small>$90</small></div>
-                    <button class="btn-dark-sm">Read More</button>
-                  </div>
-                </div>
+            <div class="card-body-custom">
+              <p class="card-cat">Textiles</p>
+              <h5 class="card-title-custom">Loom-Woven Throw Blanket</h5>
+              <p class="card-desc">100% Peruvian alpaca. Patterns drawn from Andean weaving traditions, made by family cooperatives.</p>
+              <a href="#" class="btn-read">Read More</a>
+            </div>
+          </div>
+        </div>
+        <!-- card 3 -->
+        <div class="col-sm-6 col-lg-3">
+          <div class="card-product h-100">
+            <div class="card-img-wrap">
+              <div class="card-img-placeholder">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect x="2" y="2" width="44" height="44" rx="2" stroke="#1a1a2e" stroke-width="1.5"/><line x1="2" y1="2" x2="46" y2="46" stroke="#1a1a2e" stroke-width="1.5"/><line x1="46" y1="2" x2="2" y2="46" stroke="#1a1a2e" stroke-width="1.5"/></svg>
               </div>
             </div>
-
-            <div class="col-sm-6 col-md-3">
-              <div class="card h-100">
-                <div class="card-img-top"><i class="bi bi-lamp-fill"></i></div>
-                <div class="card-body">
-                  <div class="badge-cat">Home &amp; Living</div>
-                  <h5 class="card-title">Minimal Desk Lamp</h5>
-                  <p class="card-text">Adjustable brightness, USB-C port.</p>
-                  <div class="d-flex justify-content-between align-items-center mt-2">
-                    <div class="price">$42 <small>$60</small></div>
-                    <button class="btn-dark-sm">Read More</button>
-                  </div>
-                </div>
+            <div class="card-body-custom">
+              <p class="card-cat">Wood</p>
+              <h5 class="card-title-custom">Black Walnut Serving Board</h5>
+              <p class="card-desc">Hand-oiled hardwood boards sized for everyday use. Signed by the craftsperson.</p>
+              <a href="#" class="btn-read">Read More</a>
+            </div>
+          </div>
+        </div>
+        <!-- card 4 -->
+        <div class="col-sm-6 col-lg-3">
+          <div class="card-product h-100">
+            <div class="card-img-wrap">
+              <div class="card-img-placeholder">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect x="2" y="2" width="44" height="44" rx="2" stroke="#1a1a2e" stroke-width="1.5"/><line x1="2" y1="2" x2="46" y2="46" stroke="#1a1a2e" stroke-width="1.5"/><line x1="46" y1="2" x2="2" y2="46" stroke="#1a1a2e" stroke-width="1.5"/></svg>
               </div>
             </div>
-
+            <div class="card-body-custom">
+              <p class="card-cat">Leather</p>
+              <h5 class="card-title-custom">Full-Grain Card Wallet</h5>
+              <p class="card-desc">Vegetable-tanned leather that patinas richly over time. No synthetic linings.</p>
+              <a href="#" class="btn-read">Read More</a>
+            </div>
           </div>
         </div>
       </div>
@@ -287,85 +590,128 @@
   <!-- CATEGORIES SECTION -->
   <section id="categories-section">
     <div class="container">
-      <p class="section-eyebrow">Everything You Need</p>
-      <h2 class="section-heading">Browse by Category:</h2>
-      <div class="divider"></div>
-      <div class="row g-3">
-        <div class="col-6 col-md-4 col-lg-2">
-          <div class="cat-card"><div class="cat-thumb"><i class="bi bi-phone-fill"></i></div><div class="cat-body"><h6>Electronics</h6><a href="#" class="btn-view">View Resource</a></div></div>
+      <p class="section-label">Browse by Category</p>
+      <h2 class="section-title">Shop the Collection</h2>
+      <div class="section-divider"></div>
+
+      <div class="row g-3 mt-1">
+        <div class="col-6 col-sm-4 col-lg-2">
+          <div class="cat-card">
+            <div class="cat-img-wrap">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="1" y="1" width="38" height="38" rx="2" stroke="#1a1a2e" stroke-width="1.2"/><line x1="1" y1="1" x2="39" y2="39" stroke="#1a1a2e" stroke-width="1.2"/><line x1="39" y1="1" x2="1" y2="39" stroke="#1a1a2e" stroke-width="1.2"/></svg>
+            </div>
+            <p class="cat-label">Ceramics</p>
+            <a href="#" class="btn-view">View</a>
+          </div>
         </div>
-        <div class="col-6 col-md-4 col-lg-2">
-          <div class="cat-card"><div class="cat-thumb"><i class="bi bi-shirt-fill"></i></div><div class="cat-body"><h6>Fashion</h6><a href="#" class="btn-view">View Resource</a></div></div>
+        <div class="col-6 col-sm-4 col-lg-2">
+          <div class="cat-card">
+            <div class="cat-img-wrap">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="1" y="1" width="38" height="38" rx="2" stroke="#1a1a2e" stroke-width="1.2"/><line x1="1" y1="1" x2="39" y2="39" stroke="#1a1a2e" stroke-width="1.2"/><line x1="39" y1="1" x2="1" y2="39" stroke="#1a1a2e" stroke-width="1.2"/></svg>
+            </div>
+            <p class="cat-label">Textiles</p>
+            <a href="#" class="btn-view">View</a>
+          </div>
         </div>
-        <div class="col-6 col-md-4 col-lg-2">
-          <div class="cat-card"><div class="cat-thumb"><i class="bi bi-house-heart-fill"></i></div><div class="cat-body"><h6>Home &amp; Living</h6><a href="#" class="btn-view">View Resource</a></div></div>
+        <div class="col-6 col-sm-4 col-lg-2">
+          <div class="cat-card">
+            <div class="cat-img-wrap">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="1" y="1" width="38" height="38" rx="2" stroke="#1a1a2e" stroke-width="1.2"/><line x1="1" y1="1" x2="39" y2="39" stroke="#1a1a2e" stroke-width="1.2"/><line x1="39" y1="1" x2="1" y2="39" stroke="#1a1a2e" stroke-width="1.2"/></svg>
+            </div>
+            <p class="cat-label">Woodwork</p>
+            <a href="#" class="btn-view">View</a>
+          </div>
         </div>
-        <div class="col-6 col-md-4 col-lg-2">
-          <div class="cat-card"><div class="cat-thumb"><i class="bi bi-bicycle"></i></div><div class="cat-body"><h6>Sports</h6><a href="#" class="btn-view">View Resource</a></div></div>
+        <div class="col-6 col-sm-4 col-lg-2">
+          <div class="cat-card">
+            <div class="cat-img-wrap">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="1" y="1" width="38" height="38" rx="2" stroke="#1a1a2e" stroke-width="1.2"/><line x1="1" y1="1" x2="39" y2="39" stroke="#1a1a2e" stroke-width="1.2"/><line x1="39" y1="1" x2="1" y2="39" stroke="#1a1a2e" stroke-width="1.2"/></svg>
+            </div>
+            <p class="cat-label">Leather</p>
+            <a href="#" class="btn-view">View</a>
+          </div>
         </div>
-        <div class="col-6 col-md-4 col-lg-2">
-          <div class="cat-card"><div class="cat-thumb"><i class="bi bi-book-fill"></i></div><div class="cat-body"><h6>Books</h6><a href="#" class="btn-view">View Resource</a></div></div>
+        <div class="col-6 col-sm-4 col-lg-2">
+          <div class="cat-card">
+            <div class="cat-img-wrap">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="1" y="1" width="38" height="38" rx="2" stroke="#1a1a2e" stroke-width="1.2"/><line x1="1" y1="1" x2="39" y2="39" stroke="#1a1a2e" stroke-width="1.2"/><line x1="39" y1="1" x2="1" y2="39" stroke="#1a1a2e" stroke-width="1.2"/></svg>
+            </div>
+            <p class="cat-label">Jewelry</p>
+            <a href="#" class="btn-view">View</a>
+          </div>
         </div>
-        <div class="col-6 col-md-4 col-lg-2">
-          <div class="cat-card"><div class="cat-thumb"><i class="bi bi-flower1"></i></div><div class="cat-body"><h6>Beauty</h6><a href="#" class="btn-view">View Resource</a></div></div>
+        <div class="col-6 col-sm-4 col-lg-2">
+          <div class="cat-card">
+            <div class="cat-img-wrap">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="1" y="1" width="38" height="38" rx="2" stroke="#1a1a2e" stroke-width="1.2"/><line x1="1" y1="1" x2="39" y2="39" stroke="#1a1a2e" stroke-width="1.2"/><line x1="39" y1="1" x2="1" y2="39" stroke="#1a1a2e" stroke-width="1.2"/></svg>
+            </div>
+            <p class="cat-label">Paper</p>
+            <a href="#" class="btn-view">View</a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- RESOURCES + ABOUT side by side (matches wireframe bottom row) -->
+  <!-- SAMPLE RESOURCES + ABOUT -->
   <section id="resources">
     <div class="container">
       <div class="row g-5">
-
-        <!-- Left: Sample Resources -->
+        <!-- Resources -->
         <div class="col-lg-6">
-          <p class="section-eyebrow">Support &amp; Guides</p>
-          <h2 class="section-heading">Sample Resources</h2>
-          <div class="divider"></div>
-          <div class="map-box mb-4">
-            <i class="bi bi-geo-alt-fill" style="color:var(--accent)"></i>
-            <span>ShopNest Store Location</span>
+          <p class="section-label">Learn More</p>
+          <h2 class="section-title">Sample Resources</h2>
+          <div class="section-divider"></div>
+
+          <div class="map-placeholder">
+            <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+              <circle cx="26" cy="22" r="10" stroke="#7a7a7a" stroke-width="1.5"/>
+              <path d="M26 12 C26 12 16 30 26 42 C36 30 26 12 26 12Z" stroke="#7a7a7a" stroke-width="1.5" fill="none"/>
+              <circle cx="26" cy="22" r="3" fill="#7a7a7a"/>
+            </svg>
           </div>
-          <div class="resource-item">
-            <div class="res-thumb"><i class="bi bi-file-earmark-text"></i></div>
-            <div>
-              <h6>How to Return an Order</h6>
-              <p>Step-by-step guide to initiating a return in under 5 minutes.</p>
+
+          <div class="resource-card">
+            <div class="resource-thumb">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="1" y="1" width="26" height="26" rx="2" stroke="#7a7a7a" stroke-width="1.2"/><line x1="1" y1="1" x2="27" y2="27" stroke="#7a7a7a" stroke-width="1.2"/><line x1="27" y1="1" x2="1" y2="27" stroke="#7a7a7a" stroke-width="1.2"/></svg>
+            </div>
+            <div class="resource-text">
+              <h6>Maker's Guide to Craft Commerce</h6>
+              <p>A free e-guide on pricing, packaging, and listing your handmade goods for an online audience.</p>
             </div>
           </div>
-          <div class="resource-item">
-            <div class="res-thumb"><i class="bi bi-truck"></i></div>
-            <div>
-              <h6>Shipping &amp; Delivery FAQ</h6>
-              <p>Everything about shipping timelines, costs, and tracking.</p>
+
+          <div class="resource-card">
+            <div class="resource-thumb">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="1" y="1" width="26" height="26" rx="2" stroke="#7a7a7a" stroke-width="1.2"/><line x1="1" y1="1" x2="27" y2="27" stroke="#7a7a7a" stroke-width="1.2"/><line x1="27" y1="1" x2="1" y2="27" stroke="#7a7a7a" stroke-width="1.2"/></svg>
+            </div>
+            <div class="resource-text">
+              <h6>Photographing Your Work at Home</h6>
+              <p>Tips from our in-house photographer on natural light setups and product styling that converts.</p>
             </div>
           </div>
         </div>
 
-        <!-- Right: About + Mission -->
-        <div class="col-lg-6">
+        <!-- About -->
+        <div class="col-lg-6" id="about">
+          <p class="section-label">Who We Are</p>
+          <h2 class="section-title">About ShopCraft</h2>
+          <div class="section-divider"></div>
 
-          <section id="about" class="p-4 rounded mb-4" style="background:var(--dark)">
-            <p class="section-eyebrow" style="color:var(--gold)">About ShopNest</p>
-            <h2 style="color:#fff;font-weight:700;font-size:1.5rem">Built for People Who Value Their Time</h2>
-            <div class="divider"></div>
-            <p style="color:rgba(255,255,255,0.65);font-size:0.9rem;line-height:1.8">ShopNest started with one idea: shopping online should feel as good as finding a gem in a great store. Founded in 2022, we serve thousands of happy customers nationwide.</p>
-            <div class="row g-2 mt-2">
-              <div class="col-6"><div class="stat-box"><div class="num">12K+</div><div class="lbl">Customers</div></div></div>
-              <div class="col-6"><div class="stat-box"><div class="num">320+</div><div class="lbl">Brands</div></div></div>
-            </div>
-          </section>
+          <div id="mission">
+            <p>
+              Our mission is simple: connect people who make things by hand with people who value that making. We believe commerce is most meaningful when it's personal — when you can trace an object back to the hands that shaped it. ShopCraft exists to make that traceability effortless.
+            </p>
+          </div>
 
-          <section id="mission" class="p-4 rounded" style="background:var(--mid)">
-            <p class="section-eyebrow" style="color:var(--gold)">Mission Statement</p>
-            <h2 style="color:#fff;font-weight:700;font-size:1.3rem">Our Purpose &amp; Promise</h2>
-            <div class="mission-divider"></div>
-            <p style="color:rgba(255,255,255,0.7);font-size:0.88rem;font-style:italic">"To make quality products accessible to everyone — where discovery is joyful and every shopper feels valued."</p>
-            <div class="contact-detail"><i class="bi bi-envelope-fill"></i> email@example.com</div>
-            <div class="contact-detail"><i class="bi bi-telephone-fill"></i> 123-456-7890</div>
-          </section>
-
+          <div class="contact-line">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <a href="mailto:hello@shopcraft.com">hello@shopcraft.com</a>
+          </div>
+          <div class="contact-line">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span>+63 123-456-7890</span>
+          </div>
         </div>
       </div>
     </div>
@@ -374,8 +720,8 @@
   <!-- FOOTER -->
   <footer>
     <div class="container">
-      <p class="mb-1" style="color:#fff;font-weight:700;font-size:1rem">Shop<span style="color:var(--accent)">Nest</span></p>
-      <p class="mb-0">&copy; 2022 <a href="#hero">Your Website</a>. All rights reserved.</p>
+      <p class="mb-1">© 2024 <a href="#">ShopCraft</a>. All rights reserved.</p>
+      <p class="mb-0" style="font-size:.75rem;">Made with care · Crafted for the discerning few</p>
     </div>
   </footer>
 
